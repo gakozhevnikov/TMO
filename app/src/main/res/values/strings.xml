@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">TMO</string>
+    <string name="app_log">MyLog</string>
+    <!-- String name for Toast -->
+    <string name="msg_permissions">Для работы программы необходимы разрешения</string>
+    <string name="read_external_storage">Для работы программы необходимо разрешение на чтение файлов</string>
+    <string name="write_external_storage">Для работы программы необходимо разрешение на запись файлов</string>
+    <string name="toast_file_graph">Для работы программы необходим файл graph.xls в папке Downloads или TMO</string>
+    <string name="toast_graph_to_database_equipment">Проверьте количество оборудования в файле (пробелы, и лишнии символы) или в настройках</string>
+    <string name="toast_graph_to_database_object">Проверьте количество объектов в файле (пробелы, и лишнии символы) или в настройках</string>
+    <string name="toast_graph_to_database_type_to">Проверьте количество видов тех. обслуживания в файле (пробелы, и лишнии символы) или в настройках</string>
+    <string name="toast_graph_to_database_location">Ошибка при заполнении в базе данных таблицы с позициями</string>
+    <string name="toast_main_activity_menu_update_ok">Обновление базы данных завершено успешно</string>
+    <string name="toast_main_activity_menu_update_fault">При обновление базы данных произошёл сбой</string>
+    <string name="toast_list_cursor_db">Ошибка в запросе к БД</string>
+    <string name="toast_checkbox">Ошибка при формировании checkbox</string>
+    <string name="toast_grindview_click">Ошибка при записи в gridview</string>
+
+    <!-- String name for LinkedListSettingXml:Toast -->
+    <string name="msg_bad_setting">В настройка обнаружена ошибка, файл настроек будет сброшен</string>
+    <!-- String name for TMOFile -->
+    <string name="error_creat_directory">Папка с файлами не создана</string>
+    <!-- String name for menu item -->
+    <string name="menu_control">Контроль</string>
+    <string name="menu_setting">Настройки</string>
+    <string name="menu_database">База данных</string>
+    <!-- String name for setting -->
+    <string name="textViewCountObject">Количество объектов</string>
+    <string name="textViewCountTitleEquipment">Количество видов оборудования</string>
+    <string name="textViewCountTypesTO">Количество видов ТО</string>
+    <string name="editTextCountTypesTO">Введите количество видов ТО</string>
+    <string name="textViewStartRow">Начальная строка</string>
+    <string name="editTextStartRow">Введите строку</string>
+    <string name="textViewEndRow">Конечная строка</string>
+    <string name="editTextEndRow">Введите строку</string>
+    <string name="textViewColumnTitle">Номер столбца в котором перечисляется наименование оборудования</string>
+    <string name="editTextColumnTitle">Введите строку</string>
+    <string name="textViewColumnSerial">Номер столбца в котором перечисляется индентификационное обозначение</string>
+    <string name="editTextColumnSerial">Введите номер столбца</string>
+    <string name="textViewColumnJanuary">Номер столбца соответствующий месяцу Январь</string>
+    <string name="editTextColumnJanuary">Введите номер столбца</string>
+    <string name="textViewColumnFebruary">Номер столбца соответствующий месяцу Февраль</string>
+    <string name="editTextColumnFebruary">Введите номер столбца</string>
+    <string name="textViewColumnMarch">Номер столбца соответствующий месяцу Март</string>
+    <string name="editTextColumnMarch">Введите номер столбца</string>
+    <string name="textViewColumnApril">Номер столбца соответствующий месяцу Апрель</string>
+    <string name="editTextColumnApril">Введите номер столбца</string>
+    <string name="textViewColumnMay">Номер столбца соответствующий месяцу Май</string>
+    <string name="editTextColumnMay">Введите номер столбца</string>
+    <string name="textViewColumnJune">Номер столбца соответствующий месяцу июнь</string>
+    <string name="editTextColumnJune">Введите номер столбца</string>
+    <string name="textViewColumnJuly">Номер столбца соответствующий месяцу июль</string>
+    <string name="editTextColumnJuly">Введите номер столбца</string>
+    <string name="textViewColumnAugust">Номер столбца соответствующий месяцу Август</string>
+    <string name="editTextColumnAugust">Введите номер столбца</string>
+    <string name="textViewColumnSeptember">Номер столбца соответствующий месяцу Сентябрь</string>
+    <string name="editTextColumnSeptember">Введите номер столбца</string>
+    <string name="textViewColumnOctober">Номер столбца соответствующий месяцу Октябрь</string>
+    <string name="editTextColumnOctober">Введите номер столбца</string>
+    <string name="textViewColumnNovember">Номер столбца соответствующий месяцу Ноябрь</string>
+    <string name="editTextColumnNovember">Введите номер столбца</string>
+    <string name="textViewColumnDecember">Номер столбца соответствующий месяцу Декабрь</string>
+    <string name="editTextColumnDecember">Введите номер столбца</string>
+    <string name="textViewColumnVMI">Номер столбца c датой поверки</string><!-- verification of a measuring instrument (VMI) -->
+    <string name="editTextColumnVMI">Введите номер столбца</string>
+    <string name="textViewColumnLocation">Номер столбца месторасположения оборудования</string>
+    <string name="editTextColumnLocation">Введите номер столбца</string>
+
+    <!-- String name Warnings and Alarms -->
+    <string name="warningsChangeStructureFileSetting">Есть изменения в структере файла с настройками, файл с настройками переписан на структуру по умолчанию. Перепроверки настройки</string>
+    <!-- String for checkbox -->
+    <string name="mt">Тех. обслуж.</string>
+    <string name="mDM">(Де)Монтаж</string>
+    <string name="vMI">Поверка</string>
+    <string name="crash">Авария,отказ</string>
+    <string name="storage">Хранение</string>
+    <string name="repair">Ремонт</string>
+    <string name="note">Общ. примечание</string>
+
+    <string name="mtLetter">Письмо о согласовании работ</string>
+    <string name="mtPlannedDateOfWork">Планируемая дата работы</string>
+    <string name="mtJournalMtEntry">Журнал ТО</string>
+    <string name="mtJournalEquipmentEntry">Запись в формуляре</string>
+    <string name="mtAct">Акт о ТО</string>
+    <string name="mtActTightnessOfValves">Акт о герметичности запорной арматуры при наработке ТПР</string>
+    <string name="mtStampInstall">Установка пломбы</string>
+    <string name="mtStampJournalEntry">Запись в журнале регистрации снятия и установки пломб</string>
+    <string name="mtJournalMtEntrySybervisorAdmin">Запись о входе на 3(администратор) уровень в Sybervisor</string>
+    <string name="mtActSybervisorAdmin">Акт или запись в акте о входе на 3(администратор) уровень в Sybervisor</string>
+    <string name="mtScan">Сканирование документов</string>
+    <string name="mtNote">Примечание к ТО</string>
+
+    <string name="mDMTitle">Выбор операции:монтаж, демонтаж</string>
+    <string name="mDMJournalEntry">Запись в журнале ТО</string>
+    <string name="mDMAct">Акт</string>
+    <string name="mDMActTightnessOfValves">Акт герметичности запорной арматуры</string>
+    <string name="mDM_CMCSI">КМХ СИ</string>
+    <string name="mDMJournalEquipmentEntry">Запись в формуляре</string>
+    <string name="mDMJournal9EquipmentSMAO_Entry">Запись в разделе 9 формуляра СИКН</string>
+    <string name="mDMJournalEquipmentPPD_Entry">Запись в формуляре ТПУ</string>
+    <string name="mDMListRegistrationJournalEquipmentPPD_Entry">Запись в листе регистрации уст. СИ ТПУ</string>
+    <string name="mDM_ARM_PSP">Внесение изменений в АРМ ПСП</string>
+    <string name="mDMCorrectionThermometers">Поправки к термометрам</string>
+    <string name="mDMJournalEquipmentHoursWorkEntry">Отметка в формуляре о часах работы</string>
+    <string name="mDMStorageActEnter">Акт ввода на хранение при демонтаже</string>
+    <string name="mDMStorageActOutput">Акт вывода из хранения при монтаже</string>
+    <string name="mDMStorageJournalEquipmentEntry">Запись в формуляре о хранении</string>
+    <string name="mDMScan">Сканирование документов</string>
+    <string name="mDMNote">Примечание к демонтажу/монтажу</string>
+
+    <string name="vMICertificate">Проверка свидетельства о поверке</string>
+    <string name="vMIJournalEquipmentEntry">Отметка о поверке в формуляре СИ</string>
+    <string name="vMIStampInstall">Установка пломбы поверителя</string>
+    <string name="vMI_ARM_PSP">Введение данных о поверке в АРМ ПСП</string>
+    <string name="vMIJournalMtEntrySybervisorAdmin">Запись о входе на 3(администратор) уровень в Sybervisor</string>
+    <string name="vMIActSybervisorAdmin">Акт или запись в акте о входе на 3(администратор) уровень в Sybervisor</string>
+    <string name="vMIStampJournalEntry">Оттиск клейма или пломбы на листе образцов в журнале снятия и установки пломб</string>
+    <string name="vMIActTightnessOfValves">Акт герметичности запорной арматуры при поверки ТПР</string>
+    <string name="vMIListingMf">Распечатка МФ ТПР после ввода коэффициентов</string>
+    <string name="vMIScan">Сканирование документов</string>
+    <string name="vMINote">Примечание к поверке</string>
+
+    <string name="crashAct">Акт о сбое</string>
+    <string name="crashActDismantling">Акт о снятии</string>
+    <string name="crashActMounting">Акт о установке</string>
+    <string name="crashJournalMtEntry">Запись в журнале ТО об аварии, инцинденте, сбое</string>
+    <string name="crashJournalCrashEntry">Запись в журнале отказов СИ СИКН</string>
+    <string name="crashJournalEquipmentSmaoEntry">Запись об аварии в формуляре СИКН в разделе учета</string>
+    <string name="crashJournal9EquipmentSmaoEntry">Запись о замене в разделе 9 формуляра СИКН при замене</string>
+    <string name="crashJournalEquipmentEntry">Запись в формуляре оборудования </string>
+    <string name="crashJournalMtEntrySybervisorAdmin">Запись в журнале о входе на 3(администратор) уровень Sybervisor</string>
+    <string name="crashActSybervisorAdmin">Акт или запись в акте о входе на 3(администратор) уровень в Sybervisor</string>
+    <string name="crashArmPsp">Внесение изменений в АРМ ПСП</string>
+    <string name="crashCorrectionThermometers">Поправки термометров</string>
+    <string name="crashListingMf">Распечатка МФ</string>
+    <string name="crashJournalEquipmentHoursWorkEntry">Отметка в формуляре о часах работы</string>
+    <string name="crashStorageActEnter">Акт ввода на хранение</string>
+    <string name="crashStorageActOutput">Акт вывода из хранения</string>
+    <string name="crashStorageJournalEquipmentEntry">Запись в формуляре о хранении</string>
+    <string name="crashScan">Сканирование документов</string>
+    <string name="crashAnalysis">Анализ отказа</string>
+    <string name="crashNote">Примечание к аварии</string>
+
+    <string name="storageActEnter">Акт ввода на хранение</string>
+    <string name="storageActOutput">Акт вывода из хранения</string>
+    <string name="storageJournalEquipmentEntry">Запись в формуляре о хранении</string>
+    <string name="storageScan">Сканирование документов</string>
+    <string name="storageNote">Примечание к хранению</string>
+
+    <string name="repairAct">Акт о ремонте</string>
+    <string name="repairJournalEquipmentEntry">Запись о ремонте в форуляре</string>
+    <string name="repairJournalRepairEntry">Запись в журнале ремонтов оборудования</string>
+    <string name="repairScan">Сканирование документов</string>
+    <string name="repairNote">Примечание к ремонту</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- ModeView -->
+    <string name="mode_view_text_view_view">Вид</string>
+    <string name="mode_view_text_view_mode">Режим</string>
+
+    <!-- String Infomation and other -->
+    <string name="data_base_no_information">Записи отсутствуют</string>
+    <string name="app_restart_then_user_give_permissions">Перезапустите приложение если Вы дали разрешение на доступ к файлам</string>
+    <string name="app_restart_after_setting">Перезапустите приложение для ввода в действие изменение настроек</string>
+
+
+    <!-- String for spinner -->
+    <string name="spinner_object_first">Выбери объект</string>
+    <string name="spinner_month_first">Выбери месяц</string>
+    <string name="spinner_period_first">Выбери период</string>
+    <string name="spinner_category_first">Выбери категорию</string>
+    <string name="spinner_title_first">Выбери название</string>
+    <string name="spinner_serial_first">Выбери номер</string>
+
+
+
+</resources>
