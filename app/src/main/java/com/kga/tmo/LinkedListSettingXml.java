@@ -119,10 +119,10 @@ public class LinkedListSettingXml extends LinkedList {
      * @see SettingXml*/
     void createLinkedListSettingXmlDefault (){
         add(new SettingXml(KEY_COUNT_OBJECT_SETTING,  contextllsxml.getString(R.string.textViewCountObject),"4"));
-        add(new SettingXml(KEY_COUNT_TITLE_EQUIPMENT_SETTING,  contextllsxml.getString(R.string.textViewCountTitleEquipment),"40"));
-        add(new SettingXml(KEY_COUNT_TYPES_TO_SETTING,contextllsxml.getString(R.string.textViewCountTypesTO),"4"));
+        add(new SettingXml(KEY_COUNT_TITLE_EQUIPMENT_SETTING,  contextllsxml.getString(R.string.textViewCountTitleEquipment),"42"));
+        add(new SettingXml(KEY_COUNT_TYPES_TO_SETTING,contextllsxml.getString(R.string.textViewCountTypesTO),"3"));
         add(new SettingXml(KEY_START_ROW_SETTING,contextllsxml.getString(R.string.textViewStartRow),"15"));
-        add(new SettingXml(KEY_END_ROW_SETTING,contextllsxml.getString(R.string.textViewEndRow),"424"));
+        add(new SettingXml(KEY_END_ROW_SETTING,contextllsxml.getString(R.string.textViewEndRow),"426"));
         add(new SettingXml(KEY_COLUMN_TITLE_SETTING,contextllsxml.getString(R.string.textViewColumnTitle),"1"));
         add(new SettingXml(KEY_COLUMN_SERIAL_SETTING,contextllsxml.getString(R.string.textViewColumnSerial),"2"));
         add(new SettingXml(KEY_COLUMN_JANUARY_SETTING,contextllsxml.getString(R.string.textViewColumnJanuary),"3"));

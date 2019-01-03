@@ -26,8 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -145,6 +147,10 @@ public class TMOFragment extends Fragment {
     //String stringsRowIds;
 
     ListCursorDB listCursorDB;
+    /**Карта содержащая в себе для прибора с заводским номеров дату поверки или месторасположение, со следующей структурой:
+     * Первый:Серийный номерь
+     * Второй: Карта:Ключь(дата поверки или локация), значение*/
+    Map<String,Map<String,String>> vMIDateLocation = new HashMap<String,Map<String,String>>();
 
     /**Horizontal CheckBox*/
     HorizontalScrollView HSVCheckBoxTMO;
@@ -212,6 +218,9 @@ public class TMOFragment extends Fragment {
     LinearLayout linearLayoutStorage;
     LinearLayout linearLayoutRepair;
     LinearLayout linearLayoutNote;
+
+    /**В него помещаются TextView с серийным номером и датой поверки и локацией*/
+    LinearLayout linearLayoutTextViewVMIDateLocation;
 
     boolean booleanTabMT=false;
     boolean booleanTabMDM=false;
@@ -659,8 +668,9 @@ public class TMOFragment extends Fragment {
         spinnerTitle = new TMOSpinner(context);
         spinnerSerial = new android.support.v7.widget.AppCompatSpinner(context);
 
-
-
+        linearLayoutTextViewVMIDateLocation = new LinearLayout(context);
+        linearLayoutTextViewVMIDateLocation.setOrientation(LinearLayout.VERTICAL);
+        linearLayoutTextViewVMIDateLocation.removeAllViews();
 
         //modeView.spinnerMode.setSelection(2); //удалить тест
         //Log.d(tagLog, "TMOFragment.onCreateView,Блок 2,2:"+modeView.spinnerMode.getSelectedItem());//ВАЖНО ТАК выбирается текст в Spinner
@@ -686,6 +696,7 @@ public class TMOFragment extends Fragment {
         mainLinearLayoutTMOFragment.addView(tableRowModeTMOFragment,linLayoutParamMPWC);
         mainLinearLayoutTMOFragment.addView(linearLayoutSpinnerTMOFragment,linLayoutParamMPWC);
         linearLayoutSpinnerTMOFragment.addView(spinnerObject,linLayoutParamMPWC);
+        mainLinearLayoutTMOFragment.addView(linearLayoutTextViewVMIDateLocation,linLayoutParamMPWC);
         mainLinearLayoutTMOFragment.addView(linearLayoutTMOFragmentCheckBoxTab,linLayoutParamMPWC);
 
         //Log.d(tagLog, "TMOFragment.onCreateView,Блок 2,3:");
@@ -762,6 +773,7 @@ public class TMOFragment extends Fragment {
 
         public View getCustomView(final int position, View convertView,ViewGroup parent) {
 
+
             final ViewHolder holder;
             if (convertView == null) {
                 LayoutInflater layoutInflator = LayoutInflater.from(mContext);
@@ -796,6 +808,7 @@ public class TMOFragment extends Fragment {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int getPosition = (Integer) buttonView.getTag();
+                    linearLayoutTextViewVMIDateLocation.removeAllViews();
                     Log.d(tagLog, "AdapterSpinnerCheckBox.setOnCheckedChangeListener.onCheckedChanged,1:"+getPosition+": "+isChecked+": "+holder.mTextView.getText());
                     if (isChecked & !modeView.spinnerView.getSelectedItem().toString().equals(ModeView.LIST_SPINNER_VIEW.get(2))){
                         listSerial.add(holder.mTextView.getText().toString()) ;
@@ -813,6 +826,8 @@ public class TMOFragment extends Fragment {
                                     spinnerTitle.getSelectedItem().toString(),listSerial);
                             listRowsColumnsCheck = listCursorDB.getRow_sColumnsCheck();
                             listRowsColumnsRowID = listCursorDB.getRow_sRowID();
+
+
                         }
                         else if (!modeView.spinnerView.getSelectedItem().toString().equals(ModeView.LIST_SPINNER_VIEW.get(2))){
                             Log.d(tagLog, "AdapterSpinnerCheckBox.setOnCheckedChangeListener.onCheckedChanged,22:");
@@ -822,6 +837,19 @@ public class TMOFragment extends Fragment {
                         listRowsColumnsRowID = listCursorDB.getRow_s(modeView.spinnerMode.getSelectedItem().toString(),
                                 spinnerObject.getSelectedItem().toString(), spinnerMonth.getSelectedItem().toString(), spinnerPeriod.getSelectedItem().toString(),
                                 spinnerCategory.getSelectedItem().toString(),spinnerTitle.getSelectedItem().toString(),listSerial,ListCursorDB.COLUMNS_ROWID);
+                            vMIDateLocation = listCursorDB.getVMIDateLocation(spinnerTitle.getSelectedItem().toString(),listSerial);
+                            Iterator iteratorVMIDateLocation =listSerial.iterator();
+                            Map<String,String> VMIDateLocation = new HashMap<String,String>();
+                            while (iteratorVMIDateLocation.hasNext()){
+                                String serial = iteratorVMIDateLocation.next().toString();
+                                TextView textViewVMIDateLocation = new TextView(context);
+                                VMIDateLocation=vMIDateLocation.get(serial);
+                                textViewVMIDateLocation.setText("Зав.номер:"+serial+", дата поверки:"+VMIDateLocation.get(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)+
+                                        ", локация:"+VMIDateLocation.get(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION));
+                                Log.d(tagLog, "AdapterSpinnerCheckBox.setOnCheckedChangeListener.onCheckedChanged,23:" +textViewVMIDateLocation.getText());
+                                linearLayoutTextViewVMIDateLocation.addView(textViewVMIDateLocation);
+
+                            }
                         }
                     }
                     Log.d(tagLog, "AdapterSpinnerCheckBox.setOnCheckedChangeListener.onCheckedChanged,3:"+ listRowsColumnsCheck);
@@ -846,6 +874,7 @@ public class TMOFragment extends Fragment {
                         HSVCheckBoxTMO.removeAllViews();
                         linearLayoutTMOFragmentCheckBoxTab.removeAllViews();
                         linearLayoutTMOFragmentCheckBoxTab.addView(onCreateViewCheckBoxTMO(myInflater, myContainer, mySavedInstanceState));
+
                         booleanCheckBox=true;
                     }
 
@@ -943,6 +972,7 @@ public class TMOFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!booleanTabMT&isChecked){
                     linearLayoutMt = new LinearLayout(context);
+
                     booleanGreatTabHost = true;
                     booleanTabMT = true;
                     tabSpecTMO = tabHost.newTabSpec("mt");//Создаем вкладку MT и указываем тег
@@ -972,6 +1002,7 @@ public class TMOFragment extends Fragment {
                     //Log.d(tagLog, "onItemSelected 7812:");
                     mainLinearLayoutTMOFragment.removeView(viewTabHostControl);//При повторном добавлении элемента в linearLayoutSVLControl обязательно нужно его удалить т.к. возникает ошибка,
                     mainLinearLayoutTMOFragment.addView(viewTabHostControl);
+
                     //Log.d(tagLog, "TMOFragment.OnCheckedChangeListenerCheckBoxTMOMt.Mt.5:");
                 }
 
@@ -1308,11 +1339,6 @@ public class TMOFragment extends Fragment {
             Toast.makeText(context, context.getString(R.string.toast_checkbox)+": TMOFragment.onCreateViewCheckBoxTMO", Toast.LENGTH_LONG).show();
 
         }
-
-
-
-
-
 
         linearLayoutMDM= new LinearLayout(context);
         linearLayoutMDM.setOrientation(LinearLayout.VERTICAL);

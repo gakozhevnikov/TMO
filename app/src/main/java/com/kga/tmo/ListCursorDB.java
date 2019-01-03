@@ -10,8 +10,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by home on 01.06.2018.
@@ -1142,4 +1144,73 @@ public class ListCursorDB {
             Toast.makeText(context, context.getString(R.string.toast_list_cursor_db)+": ListCursorDB.insertContentCellDB", Toast.LENGTH_LONG).show();
         }
     }
+
+    /**Метод возращает из БД дату поверки и местонахождение прибора
+     * */
+    Map<String,Map<String,String>> getVMIDateLocation (String title, List<String> listSerial){
+
+        Map<String, Map<String,String>> SerialVMIDateLocation = new HashMap<String,Map<String,String>>();
+        String serial ="";
+        Iterator iterator=listSerial.iterator();
+
+
+        Log.d(tagLog, "ListCursorDB.getVMIDateLocation,1:");
+
+        try {
+
+            if (!title.equals(null)|!listSerial.isEmpty()){
+                Log.d(tagLog, "ListCursorDB.getVMIDateLocation,2:");
+                while (iterator.hasNext()){//получаем строку с серийными номерами для вставки в запросы
+                    Map<String,String> VMIDateLocation = new HashMap<String,String>();
+                    serial=iterator.next().toString();
+
+                    cursorDB = maindb.query(true, DataBaseContract.GraphDBTableClass.TABLE_NAME,
+                            new String[]{DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI,DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION},
+                            DataBaseContract.GraphDBTableClass.COLUMN_NAME_TITLE+ "=? AND "
+                                    +DataBaseContract.GraphDBTableClass.COLUMN_NAME_SERIAL+ "=?", new String[]{title,serial}, null, null, null, null);
+                    if (cursorDB.isAfterLast()) {
+                        Log.d(tagLog, "ListCursorDB.getVMIDateLocation,3:");
+                        VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI,context.getString(R.string.data_base_no_information));
+                        VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION,context.getString(R.string.data_base_no_information));
+                        serial=context.getString(R.string.data_base_no_information);
+                    } else {
+                        cursorDB.moveToFirst();
+                        Log.d(tagLog, "ListCursorDB.getVMIDateLocation,4:"+cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI) )+": "+cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)));
+                        Log.d(tagLog, "ListCursorDB.getVMIDateLocation,5:"+cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION) )+": "+cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)));
+                        if (cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)) == null
+                                & cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)).equals(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)) {
+
+                            VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI, "");
+                        } else if (cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)) != null
+                                & cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)).equals(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)) {
+                            VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI, cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_DATE_VMI)));
+                        }
+                        if (cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)) == null
+                                & cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)).equals(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)) {
+                            VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION, "");
+                        } else if (cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)) != null
+                                & cursorDB.getColumnName(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)).equals(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)) {
+                            VMIDateLocation.put(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION, cursorDB.getString(cursorDB.getColumnIndex(DataBaseContract.GraphDBTableClass.COLUMN_NAME_LOCATION)));
+                        }
+
+                    }Log.d(tagLog, "ListCursorDB.getVMIDateLocation,6:"+VMIDateLocation);
+                    SerialVMIDateLocation.put(serial,VMIDateLocation);
+                    Log.d(tagLog, "ListCursorDB.getVMIDateLocation,7:"+SerialVMIDateLocation);
+                }
+
+
+            }
+
+
+            cursorDB.close();
+        } catch (Exception e) {
+            Log.d(tagLog, "ListCursorDB.getVMIDateLocation: "+e);
+            Toast.makeText(context, context.getString(R.string.toast_list_cursor_db)+": ListCursorDB.getVMIDateLocation", Toast.LENGTH_LONG).show();
+            cursorDB.close();
+
+        }
+        return SerialVMIDateLocation;
+
+    }
+
 }
