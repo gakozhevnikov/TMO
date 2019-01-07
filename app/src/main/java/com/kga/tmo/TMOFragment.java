@@ -827,7 +827,6 @@ public class TMOFragment extends Fragment {
                             listRowsColumnsCheck = listCursorDB.getRow_sColumnsCheck();
                             listRowsColumnsRowID = listCursorDB.getRow_sRowID();
 
-
                         }
                         else if (!modeView.spinnerView.getSelectedItem().toString().equals(ModeView.LIST_SPINNER_VIEW.get(2))){
                             Log.d(tagLog, "AdapterSpinnerCheckBox.setOnCheckedChangeListener.onCheckedChanged,22:");
